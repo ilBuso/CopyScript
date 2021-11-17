@@ -15,7 +15,7 @@ public class Gun : MonoBehaviour
     private Quaternion angle;
     public float minOffset;
     public float maxOffset;
-    private int shotFires;
+    public static int shotFires;
     private float time;
     public float timeToNormalRecoil;
     private bool StartStopwatch;
@@ -76,7 +76,16 @@ public class Gun : MonoBehaviour
         else
         {
             StartStopwatch = false;
-            shotFires = 0;
+
+            if (Shotgun.amIAlive == false)
+            {
+                shotFires = 0;
+            }
+            else
+            {
+                shotFires = 3;
+            }
+
             time = 0f;
         }
 
