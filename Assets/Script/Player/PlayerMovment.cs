@@ -30,7 +30,7 @@ public class PlayerMovment : MonoBehaviour
     private bool isRunning;
     
     //Crouch
-    private bool isCrouched;
+    public static bool isCrouched;
 
     //Dash
     private bool isDashing;

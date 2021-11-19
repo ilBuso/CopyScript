@@ -91,7 +91,14 @@ public class Gun : MonoBehaviour
 
         if (shotFires >= 4 || GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovment>().isMoving == true)
         {
-            angle.eulerAngles = new Vector3(Random.Range(minOffset, maxOffset), Random.Range(minOffset, maxOffset), Random.Range(minOffset, maxOffset));
+            if (PlayerMovment.isCrouched == true)
+            {
+                angle.eulerAngles = new Vector3(Random.Range(minOffset / 2, maxOffset / 2), Random.Range(minOffset / 2, maxOffset / 2), Random.Range(minOffset / 2, maxOffset / 2));
+            }
+            else
+            {
+                angle.eulerAngles = new Vector3(Random.Range(minOffset, maxOffset), Random.Range(minOffset, maxOffset), Random.Range(minOffset, maxOffset));
+            }
         }
         else
         {
