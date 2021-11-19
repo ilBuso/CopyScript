@@ -8,6 +8,7 @@ public class Sniper : MonoBehaviour
     //Script
     public static bool amIAlive = false;
     public Gun gun;
+    public ScreenButtons screenButtons;
 
     //Camera
     private new Camera camera;
@@ -28,11 +29,22 @@ public class Sniper : MonoBehaviour
     //Ammo
     public int maxAmmo;
     private int currentAmmo;
+
     private bool isReloading;
+    public Animator animator;
 
     //Recoil
     public Vector3 backMovement;
     public float recoilTime;
+
+    //Aim
+    public static bool isAiming;
+
+    public GameObject scopeOverlay;
+    private GameObject weaponCamera;
+    private Camera mainCamera;
+    public float scopedFOV;
+    private float normalFOV;
 
     //UI
     public GameObject weaponImage;
@@ -43,6 +55,19 @@ public class Sniper : MonoBehaviour
     {
         weaponImage.SetActive(amIAlive);
         gameObject.SetActive(amIAlive);
+        scopeOverlay.SetActive(amIAlive);
+    }
+
+    void OnEnable()
+    {
+        //Reload
+        isReloading = false;
+        animator.SetBool("Reloading", false);
+
+        //Aim
+        scopeOverlay.SetActive(false);
+        isAiming = false;
+        screenButtons.crosshairUI.SetActive(false);
     }
 
     void Start()
@@ -56,6 +81,10 @@ public class Sniper : MonoBehaviour
 
         currentAmmo = maxAmmo;
         isReloading = false;
+
+        isAiming = false;
+        mainCamera = Camera.main;
+        weaponCamera = GameObject.FindGameObjectWithTag("WeaponCamera");
     }
 
     void Update()
@@ -63,6 +92,21 @@ public class Sniper : MonoBehaviour
         //UI
         maxAmmoUI.text = maxAmmo.ToString();
         currentAmmoUI.text = currentAmmo.ToString();
+
+        //Aim
+        if (Input.GetButtonDown("Fire2") && !isReloading && ScreenButtons.isPaused == false)
+        {
+            isAiming = !isAiming;
+
+            if (isAiming)
+            {
+                StartCoroutine(OnScoped());
+            }
+            else
+            {
+                OnUnScoped();
+            }
+        }
 
         if (Input.GetButtonDown("Fire1") && currentAmmo > 0 && Time.time >= nextTimeToFire && ScreenButtons.isPaused == false && !isReloading)
         {
@@ -80,6 +124,12 @@ public class Sniper : MonoBehaviour
         //Reload
         if (((Input.GetKeyDown(KeyCode.R) && currentAmmo < maxAmmo) || currentAmmo == 0) && !isReloading)
         {
+            if (isAiming)
+            {
+                isAiming = !isAiming;
+                OnUnScoped();
+            }
+
             StartCoroutine(Reload());
         }
     }
@@ -87,15 +137,21 @@ public class Sniper : MonoBehaviour
     private void OnDisable()
     {
         isReloading = false;
+        screenButtons.crosshairUI.SetActive(true);
     }
+
 
     //Reload
     private IEnumerator Reload()
     {
         isReloading = true;
 
-        yield return new WaitForSeconds(reloadTime);
-        currentAmmo = maxAmmo;
+        animator.SetBool("Reloading", true); //Start Animation
+        yield return new WaitForSeconds(reloadTime - .25f); //Wait for duration Animation - transition time (.25 by deafult)
+        animator.SetBool("Reloading", false); //Finish Animaiton
+        yield return new WaitForSeconds(.25f); //Wait transition time
+
+        currentAmmo = maxAmmo; //Reset ammonition
 
         isReloading = false;
     }
@@ -108,5 +164,40 @@ public class Sniper : MonoBehaviour
         yield return new WaitForSeconds(recoilTime);
 
         transform.localPosition += backMovement;
+    }
+
+    //Aim
+    IEnumerator OnScoped()
+    {
+        //animator.SetBool("Scopeed", isAiming);        //-------------------------
+        yield return new WaitForSeconds(0.15f);
+
+        scopeOverlay.SetActive(true);
+        weaponCamera.SetActive(false);
+
+        //Zoom
+        normalFOV = mainCamera.fieldOfView;
+        mainCamera.fieldOfView = scopedFOV;
+
+        //UI
+        ScreenButtons.healthUI.SetActive(!isAiming);
+        ScreenButtons.clockUI.SetActive(!isAiming);
+        ScreenButtons.weaponUI.SetActive(!isAiming);
+    }
+
+    void OnUnScoped()
+    {
+        //animator.SetBool("Scopeed", isAiming);        //-------------------------
+
+        scopeOverlay.SetActive(false);
+        weaponCamera.SetActive(true);
+
+        //Zoom
+        mainCamera.fieldOfView = normalFOV;
+
+        //UI
+        ScreenButtons.healthUI.SetActive(!isAiming);
+        ScreenButtons.clockUI.SetActive(!isAiming);
+        ScreenButtons.weaponUI.SetActive(!isAiming);
     }
 }

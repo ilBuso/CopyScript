@@ -10,9 +10,10 @@ public class ScreenButtons : MonoBehaviour
     private GameObject pauseScreenUI;
 
     //UI
-    private GameObject healthUI;
-    private GameObject weaponUI;
-    private GameObject clockUI;
+    public static GameObject healthUI;
+    public static GameObject weaponUI;
+    public static GameObject clockUI;
+    public GameObject crosshairUI;
 
     void Start()
     {

@@ -28,7 +28,9 @@ public class Rifle : MonoBehaviour
     //Ammo
     public int maxAmmo;
     private int currentAmmo;
+
     private bool isReloading;
+    public Animator animator;
 
     //Recoil
     public Vector3 backMovement;
@@ -43,6 +45,12 @@ public class Rifle : MonoBehaviour
     {
         weaponImage.SetActive(amIAlive);
         gameObject.SetActive(amIAlive);
+    }
+
+    void OnEnable()
+    {
+        isReloading = false;
+        animator.SetBool("Reloading", false);
     }
 
     void Start()
@@ -96,7 +104,11 @@ public class Rifle : MonoBehaviour
     {
         isReloading = true;
 
-        yield return new WaitForSeconds(reloadTime);
+        animator.SetBool("Reloading", true); //Start Animation
+        yield return new WaitForSeconds(reloadTime - .25f); //Wait for duration Animation - transition time (.25 by deafult)
+        animator.SetBool("Reloading", false); //Finish Animaiton
+        yield return new WaitForSeconds(.25f); //Wait transition time
+
         currentAmmo = maxAmmo; //Reset ammonition
 
         isReloading = false;
