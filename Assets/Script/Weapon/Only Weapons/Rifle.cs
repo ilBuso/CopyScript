@@ -73,7 +73,7 @@ public class Rifle : MonoBehaviour
         maxAmmoUI.text = maxAmmo.ToString();
         currentAmmoUI.text = currentAmmo.ToString();
 
-        if (Input.GetButton("Fire1") && currentAmmo > 0 && Time.time >= nextTimeToFire && ScreenButtons.isPaused == false && !isReloading)
+        if (Input.GetButton("Fire1") && currentAmmo > 0 && Time.time >= nextTimeToFire && ScreenButtons.isPaused == false && !isReloading && PlayerHealth.isDead == false)
         {
             //Shoot
             gun.Shoot(camera, gunEnd, laserLine, damage, range, hitForce); //Call function from gun script

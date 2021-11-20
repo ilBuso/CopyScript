@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
+    //Script
+    public ScreenButtons screenButtons;
+
     //Health
     private float health;
     public float maxHealth;
@@ -16,6 +20,15 @@ public class PlayerHealth : MonoBehaviour
     //UI
     public Slider healthSlider;
     public Slider sheildSlider;
+
+    //Die
+    public static bool isDead;
+    public float waitTime;
+    public float waitBeforeMenu;
+    public Animator animator;
+    public GameObject deadCamera;
+    public GameObject winUI;
+    private GameObject weaponCamera;
 
     void Start()
     {
@@ -29,6 +42,10 @@ public class PlayerHealth : MonoBehaviour
 
         sheildSlider.maxValue = sheild;
         sheildSlider.value = sheild;
+
+        //Die
+        isDead = false;
+        weaponCamera = GameObject.FindGameObjectWithTag("WeaponCamera");
     }
 
     void Update()
@@ -36,6 +53,12 @@ public class PlayerHealth : MonoBehaviour
         //UI
         healthSlider.value = health;
         sheildSlider.value = sheild;
+
+        //Damage
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            TakeDamage(200);
+        }
     }
 
     public void TakeDamage(float damage)
@@ -51,13 +74,50 @@ public class PlayerHealth : MonoBehaviour
             if (health <= 0f) //if life reach 0xp
             {
                 //die
-                Die();
+                StartCoroutine(Die());
             }
         }
     }
 
-    public void Die()
+    public IEnumerator Die()
     {
-        Debug.Log("You Died");
+        isDead = true;
+
+        //Ragdoll
+        //-----------
+
+        //Wait
+        yield return new WaitForSeconds(waitTime);
+
+        //Deactivate UI
+        ScreenButtons.healthUI.SetActive(false);
+        ScreenButtons.clockUI.SetActive(false);
+        ScreenButtons.weaponUI.SetActive(false);
+        weaponCamera.SetActive(false);
+
+        //Activate DeadCamera
+        deadCamera.SetActive(true);
+
+        //Move camera
+        animator.SetBool("Dead", true);
+
+        //Activate UI
+        winUI.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        //Wait
+        yield return new WaitForSeconds(waitBeforeMenu);
+
+        //Variable
+        isDead = false;
+        animator.SetBool("Dead", false);
+        deadCamera.SetActive(false);
+        winUI.SetActive(false);
+
+        //Return to MainMenu  //--//if do any changes do in ScreenButtons.cs too//--//
+        Time.timeScale = 1f;
+        ScreenButtons.isPaused = false;
+        SceneManager.LoadScene("Main_Menu");
     }
 }

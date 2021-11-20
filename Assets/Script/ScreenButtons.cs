@@ -85,5 +85,7 @@ public class ScreenButtons : MonoBehaviour
         Time.timeScale = 1f; //resume time
         isPaused = false;
         SceneManager.LoadScene("Main_Menu"); // whewn the botton is pressed the schene "Main_Menu" gets loaded
+
+        //if do any changes do in PlayerHealth.cs too
     }
 }

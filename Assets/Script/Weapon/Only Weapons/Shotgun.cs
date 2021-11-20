@@ -73,7 +73,7 @@ public class Shotgun : MonoBehaviour
         maxAmmoUI.text = maxAmmo.ToString();
         currentAmmoUI.text = currentAmmo.ToString();
 
-        if (Input.GetButtonDown("Fire1") && currentAmmo > 0 && Time.time >= nextTimeToFire && ScreenButtons.isPaused == false && !isReloading)
+        if (Input.GetButtonDown("Fire1") && currentAmmo > 0 && Time.time >= nextTimeToFire && ScreenButtons.isPaused == false && !isReloading && PlayerHealth.isDead == false)
         {
             //Shoot
             int i = 0;

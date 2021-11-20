@@ -52,7 +52,7 @@ public class Knife : MonoBehaviour
         maxAmmoUI.text = maxAmmo.ToString();
         currentAmmoUI.text = currentAmmo.ToString();
 
-        if (Input.GetButtonDown("Fire1") && isSwinging == false)
+        if (Input.GetButtonDown("Fire1") && isSwinging == false && PlayerHealth.isDead == false)
         {
             StartCoroutine(Swing());
         }

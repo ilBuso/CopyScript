@@ -33,7 +33,7 @@ public class Thrower : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G) && !hasThrown && ScreenButtons.isPaused == false && ((nadeNumber > 0 && cNumber == maxC) || (nadeNumber == maxNade && cNumber > 0)))
+        if (Input.GetKeyDown(KeyCode.G) && !hasThrown && ScreenButtons.isPaused == false && PlayerHealth.isDead == true &&((nadeNumber > 0 && cNumber == maxC) || (nadeNumber == maxNade && cNumber > 0)))
         {
             if (isUsingNade)
             {
