@@ -74,6 +74,7 @@ public class Pistola : MonoBehaviour
             //Shoot
             gun.Shoot(camera, gunEnd, laserLine, damage, range, hitForce);
 
+
             //Recoil
             StartCoroutine(Recoil());
 
