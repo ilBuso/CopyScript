@@ -3601,7 +3601,7 @@ MonoBehaviour:
   waitBeforeMenu: 4
   animator: {fileID: 1884636713462378041}
   deadCamera: {fileID: 4713562388736418049}
-  winUI: {fileID: 1570939392954211554}
+  loseUI: {fileID: 1570939392954211554}
 --- !u!1 &273324698349766807
 GameObject:
   m_ObjectHideFlags: 0
@@ -4172,7 +4172,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You Win
+  m_text: You Lost
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5270,7 +5270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4038548362118352093}
   m_Layer: 5
-  m_Name: Win
+  m_Name: Lost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5977,7 +5977,7 @@ GameObject:
   - component: {fileID: 5619458742172940744}
   - component: {fileID: 7109641253659863923}
   m_Layer: 5
-  m_Name: Win Pannel
+  m_Name: Lost Pannel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

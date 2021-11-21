@@ -27,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
     public float waitBeforeMenu;
     public Animator animator;
     public GameObject deadCamera;
-    public GameObject winUI;
+    public GameObject loseUI;
     private GameObject weaponCamera;
 
     void Start()
@@ -102,7 +102,7 @@ public class PlayerHealth : MonoBehaviour
         animator.SetBool("Dead", true);
 
         //Activate UI
-        winUI.SetActive(true);
+        loseUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -113,7 +113,7 @@ public class PlayerHealth : MonoBehaviour
         isDead = false;
         animator.SetBool("Dead", false);
         deadCamera.SetActive(false);
-        winUI.SetActive(false);
+        loseUI.SetActive(false);
 
         //Return to MainMenu  //--//if do any changes do in ScreenButtons.cs too//--//
         Time.timeScale = 1f;
