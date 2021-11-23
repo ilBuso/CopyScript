@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerCameraAndMouseMovement : MonoBehaviour
 {
+    //Script
+    SettingsMenu settingsMenu;
+
     //Player
     private GameObject player;
 
@@ -12,26 +15,25 @@ public class PlayerCameraAndMouseMovement : MonoBehaviour
     private Vector3 mouse;
     private bool isPaused; //variable from ScreenButtons
 
-    //Camera
-    private GameObject mainCamera;
-    private new Vector3 camera;
+    private float mouseSensitivity;
 
     void Start()
     {
         //Assign
         player = GameObject.FindGameObjectWithTag("Player");
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 
-        //Mouse
         xRotation = 0f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        mouseSensitivity = 100f;
     }
 
     void Update()
     {
         //Assign
         isPaused = ScreenButtons.isPaused;
+        //mouseSensitivity = settingsMenu.SetSensitivity();
 
         //Mouse
         if (!isPaused)
@@ -39,8 +41,8 @@ public class PlayerCameraAndMouseMovement : MonoBehaviour
             //for the input a vector3(0f, 0f, 0f) is created in for x and y is putted the mouse input so
             //we have all the mouse inputs in a single variable
             mouse = Vector3.zero;
-            mouse.x = Input.GetAxis("Mouse X")/* * mouseSensitivity * Time.deltaTime*/;
-            mouse.y = Input.GetAxis("Mouse Y")/* * mouseSensitivity * Time.deltaTime*/;
+            mouse.x = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+            mouse.y = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
             //difficolt math
             xRotation -= mouse.y;
@@ -48,15 +50,5 @@ public class PlayerCameraAndMouseMovement : MonoBehaviour
             transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
             player.transform.Rotate(Vector3.up * mouse.x);
         }
-
-
-        //Camera
-        camera = mainCamera.transform.position;
-
-        camera.x = player.transform.position.x;
-        camera.y = player.transform.position.y + 0.5f;
-        camera.z = player.transform.position.z/* + 0.24f*/;
-
-        mainCamera.transform.position = camera;
     }
 }
