@@ -7,68 +7,72 @@ using TMPro;
 
 public class SettingsMenu : MonoBehaviour
 {
-    //Volume
-    public AudioMixer audioMixer;
-
     //Sensitivity
-    public Slider sensitivitySlider;
+    public Slider sliderSensitivity;
+    public TMP_Text sesitivityText;
 
+    //Graphic
+    public TMP_Dropdown dropdownGraphic;
+    
     //Resolution
     Resolution[] resolutions;
-    public TMP_Dropdown dropdown;
+    public TMP_Dropdown dropdownResolution;
+
+    //Volume
+    public AudioMixer audioMixer;
+    public Slider sliderVolume;
 
     //Save Variables
     const string PrefNameSensitivity = "optionvaluesensitivity";
     const string PrefNameGraphic = "optionvaluegraphic";
     const string PrefNameResolution = "optionvalueresolution";
-    const string PrefNameVolume = "optionvalueVolume";
-
-    void OnEnable()
-    {
-        //Set Values
-        //SetSensitivity(PlayerPrefs.GetInt(PrefNameSensitivity, 100));
-        SetQuality(PlayerPrefs.GetInt(PrefNameGraphic, 0));
-        SetResolution(PlayerPrefs.GetInt(PrefNameResolution, 0));
-        SetVolume(PlayerPrefs.GetFloat(PrefNameVolume, 0));
-    }
+    const string PrefNameVolume = "optionvaluevolume";
 
     void Start()
     {
-        resolutions = Screen.resolutions;
+        //SetValues
+        sliderSensitivity.value = PlayerPrefs.GetFloat("optionvaluesensitivity");
+        dropdownGraphic.value = PlayerPrefs.GetInt("optionvaluegraphic");
+        sliderVolume.value = PlayerPrefs.GetFloat("optionvaluevolume");
 
-        dropdown.ClearOptions();
+        //Resolution
+        resolutions = Screen.resolutions;
+        //dropdownResolution.ClearOptions();
 
         List<string> options = new List<string>();
 
-        int currentResolution = 0;
+        //int currentResolution = 0;
         for (int i = 0; i< resolutions.Length; i++)
         {
             string option = resolutions[i].width + "x" + resolutions[i].height;
             options.Add(option);
-
-            if(resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResolution = i;
-            }
         }
 
-        dropdown.AddOptions(options);
-        dropdown.value = currentResolution;
-        dropdown.RefreshShownValue();
+        dropdownResolution.AddOptions(options);
+
+        dropdownResolution.value = PlayerPrefs.GetInt("optionvalueresolution");
+
+        PlayerPrefs.Save();
     }
 
-
-    public float SetSensitivity()
+    void Update()
     {
-        float a = sensitivitySlider.value;
+        //SetSensitivity();
+    }
+
+    //Sensitivity
+    public void SetSensitivity(float value)
+    {
+        //UI
+        int a = (int)value;
+        sesitivityText.text = a.ToString();
 
         //Save
-        PlayerPrefs.SetFloat(PrefNameSensitivity, a);
+        PlayerPrefs.SetFloat(PrefNameSensitivity, value);
         PlayerPrefs.Save();
-
-        return a;
     }
 
+    //Graphic
     public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
@@ -78,6 +82,8 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+
+    //Resolution
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
@@ -88,6 +94,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    //Volume
     public void SetVolume(float volume)
     {
         audioMixer.SetFloat("volume", volume);

@@ -26,14 +26,14 @@ public class PlayerCameraAndMouseMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        mouseSensitivity = 100f;
+        //mouseSensitivity = 100f;
     }
 
     void Update()
     {
         //Assign
         isPaused = ScreenButtons.isPaused;
-        //mouseSensitivity = settingsMenu.SetSensitivity();
+        mouseSensitivity = PlayerPrefs.GetFloat("optionvaluesensitivity");
 
         //Mouse
         if (!isPaused)
