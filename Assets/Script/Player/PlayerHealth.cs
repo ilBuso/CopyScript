@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    //Script
-    public ScreenButtons screenButtons;
-
     //Health
     private float health;
     public float maxHealth;

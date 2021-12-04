@@ -106,14 +106,14 @@ public class Gun : MonoBehaviour
         }
 
         //Hit
-        if (Physics.Raycast(rayOrigin, angle * gunCamera.transform.forward, out hit, range)) //true if it something
+        if (Physics.Raycast(rayOrigin, angle * gunCamera.transform.forward, out hit, range)) //true if hit something
         {
             //VFX
             laserLine.SetPosition(1, hit.point);
             StartCoroutine(LaserLine(laserLine));
 
             ///Enemy
-            EnemyHealth health = hit.collider.GetComponent<EnemyHealth>();
+            EnemyHealth health = hit.collider.GetComponentInParent<EnemyHealth>(); //GetComponentInParent because he ave to search the script all the way in the first game object
 
             if (health != null)
             {
