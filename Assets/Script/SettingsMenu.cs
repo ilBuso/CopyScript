@@ -37,11 +37,9 @@ public class SettingsMenu : MonoBehaviour
 
         //Resolution
         resolutions = Screen.resolutions;
-        //dropdownResolution.ClearOptions();
 
         List<string> options = new List<string>();
 
-        //int currentResolution = 0;
         for (int i = 0; i< resolutions.Length; i++)
         {
             string option = resolutions[i].width + "x" + resolutions[i].height;
@@ -53,11 +51,6 @@ public class SettingsMenu : MonoBehaviour
         dropdownResolution.value = PlayerPrefs.GetInt("optionvalueresolution");
 
         PlayerPrefs.Save();
-    }
-
-    void Update()
-    {
-        //SetSensitivity();
     }
 
     //Sensitivity

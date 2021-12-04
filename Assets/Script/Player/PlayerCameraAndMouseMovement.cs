@@ -25,8 +25,6 @@ public class PlayerCameraAndMouseMovement : MonoBehaviour
         xRotation = 0f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        //mouseSensitivity = 100f;
     }
 
     void Update()
