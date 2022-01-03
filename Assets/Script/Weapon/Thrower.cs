@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Thrower : MonoBehaviour
 {
+    /// <summary>
+    ///  This Script contains all the mechanics for every throwable, the things not here are in thee dedicated script of the gun
+    /// </summary>
+
     //Script
     public static bool isUsingNade = true;
 

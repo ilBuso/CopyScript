@@ -7,6 +7,10 @@ using TMPro;
 
 public class DropdowValueSave : MonoBehaviour
 {
+    /// <summary>
+    /// This Script is to set and save the map selected
+    /// </summary>
+
     const string PrefName = "optionvalue";
     public static TMP_Dropdown dropdown;
 

@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Inventory : MonoBehaviour
 {
+    /// <summary>
+    /// This Script is to set the weapons the player is using
+    /// </summary>
     void Start()
     {
         

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class RayViewer : MonoBehaviour
 {
+    /// <summary>
+    /// This Script is for shownig the raycast ray
+    /// </summary>
+
     private float range;
     private new Camera camera;
 

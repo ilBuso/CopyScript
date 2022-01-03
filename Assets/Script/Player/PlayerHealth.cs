@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
+    /// <summary>
+    /// This Script is for the player health + Die actions
+    /// </summary>
+
     //Health
     private float health;
     public float maxHealth;

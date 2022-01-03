@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuButtons : MonoBehaviour
 {
+    /// <summary>
+    /// This Script is to set the dropdown for the maps in the Main_Menu
+    /// </summary>
+
     private string map;
 
     void Start()

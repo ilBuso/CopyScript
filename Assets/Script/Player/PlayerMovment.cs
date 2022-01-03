@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class PlayerMovment : MonoBehaviour
 {
+    /// <summary>
+    /// This Script is for movement inputs + movement speed and form + stamina
+    /// </summary>
+
     //Player
     private Rigidbody rb;
     private GameObject player;

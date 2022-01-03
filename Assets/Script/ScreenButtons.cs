@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class ScreenButtons : MonoBehaviour
 {
+    /// <summary>
+    /// This Script is to enable/disable the PauseScreen and for the buttons on it
+    /// </summary>
+
     //Pause-Resume
     public static bool isPaused; //is static because of the input sistem so when is paused the camera doesn't move
     private GameObject pauseScreenUI;

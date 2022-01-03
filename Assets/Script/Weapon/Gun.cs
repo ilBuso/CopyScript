@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    /// <summary>
+    /// This Script contains all the mechanics for every gun, the things not here (as reload....) are in thee dedicated script of the gun
+    /// </summary>
+
     public static GameObject hitCrosshair;
     public static float weaponRange;
     public GameObject muzzleFlash;

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    /// <summary>
+    /// This Script is for the enemy health + Die actions
+    /// </summary>
+
     //Health
     private float health;
     public float maxHealth;

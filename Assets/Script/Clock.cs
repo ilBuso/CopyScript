@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class Clock : MonoBehaviour
 {
+    /// <summary>
+    /// This Script is for the contdown for the spawn-wall and for the clock that statt whith the stat of the match
+    /// </summary>
+
     //Wall Countdown
     private GameObject spawnWall;
     private GameObject countdownWallClock;
@@ -40,8 +44,6 @@ public class Clock : MonoBehaviour
     {
         //UI
         wallCountdownUI.text = countdownWall.ToString();
-        TheClock(seconds, minutes);
-
 
         //Wall Countdown
         if (SceneManager.GetActiveScene().name != "Warm_Up")
@@ -76,22 +78,7 @@ public class Clock : MonoBehaviour
                     seconds = 0f;
                     minutes++;
                 }
-                else
-                {
-                    //EndGame()  //-----------
-                }
             }
         }
-    }
-
-    private void TheClock(float second, float minute)
-    {
-        //transform valiue from float to int
-        int intSecond = (int)second;
-        int intMinute = (int)minute;
-
-        //UI
-        seconsdsUI.text = intSecond.ToString();
-        minutesUI.text = intMinute.ToString();
     }
 }

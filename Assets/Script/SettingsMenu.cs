@@ -7,6 +7,10 @@ using TMPro;
 
 public class SettingsMenu : MonoBehaviour
 {
+    /// <summary>
+    /// This Script is to set and save the game settings
+    /// </summary>
+
     //Sensitivity
     public Slider sliderSensitivity;
     public TMP_Text sesitivityText;

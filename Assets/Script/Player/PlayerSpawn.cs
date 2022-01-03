@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerSpawn : MonoBehaviour
 {
+    /// <summary>
+    /// This Script is to spawn the player
+    /// </summary>
+
     //Player Prefab
     public GameObject playerPrefab;
 

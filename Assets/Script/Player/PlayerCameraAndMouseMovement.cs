@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerCameraAndMouseMovement : MonoBehaviour
 {
+    /// <summary>
+    /// This Script is for the mouse input (Look around)
+    /// </summary>
+
     //Script
     SettingsMenu settingsMenu;
 

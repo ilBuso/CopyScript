@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class WeaponSwitch : MonoBehaviour
 {
+    /// <summary>
+    ///  This Script is for switching between primary, secondary and knife
+    /// </summary>
+
     //Variable
     private int selectedWeapon;
     public static bool switched;
